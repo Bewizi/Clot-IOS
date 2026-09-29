@@ -11,7 +11,7 @@ struct HomeScreen: View {
     
     @State private var searchItems = ""
     
-//    let category: CategoryItem
+    
     
     var body: some View {
         VStack(alignment: .leading){
@@ -78,9 +78,10 @@ struct HomeScreen: View {
                 HStack{
                     AppText(title: "Categories", fontSize: 16, textColor: .shadowGrey900, fontWeight: .bold)
                     Spacer()
-                    Button{
-                        
-                    }label: {
+                    NavigationLink {
+                        CategoryListView()
+                            .navigationBarBackButtonHidden()
+                    } label: {
                         AppText(title: "See All", fontSize: 16, textColor: .shadowGrey900, fontWeight: .regular)
                     }
                     
@@ -122,3 +123,4 @@ struct HomeScreen: View {
 #Preview {
     HomeScreen()
 }
+
