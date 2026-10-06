@@ -46,9 +46,6 @@ struct HomeScreen: View {
                     
                 }
                 
-                
-                
-                
             }
             .padding(.bottom, 24)
             
@@ -108,7 +105,19 @@ struct HomeScreen: View {
                 
                 
             }
-            Spacer()
+            .padding(.bottom, 24)
+            
+            ScrollView(showsIndicators:false){
+                VStack(alignment: .leading, spacing: 24){
+                    TopSelling(products: TopSellingMock.topSelling)
+                        
+                    
+                    NewInView(products: NewInMock.newIn)
+                }
+            }
+            
+            
+            
         }
         
         .padding(.top, 20)
