@@ -126,7 +126,7 @@ struct PasswordScreen:View {
         }
         .padding(.horizontal, 24)
         .navigationDestination(isPresented: $viewModel.loginSucceeded ){
-            HomeScreen()
+            NavigationBar()
                 .navigationBarBackButtonHidden()
         }
         .alert(
