@@ -66,10 +66,8 @@ struct NavigationBar: View {
                             .renderingMode(.template)
                             .font(.system(size: 24))
                             .foregroundStyle(
-                                selectedTab == index ? Color.navColor900: Color.gray.opacity(0.5)
+                                selectedTab == index ? Color.mediumSlateBlue300: Color.shadowGrey900
                             )
-                        
-                        
                     }
                     
                     .frame(maxWidth: .infinity)
