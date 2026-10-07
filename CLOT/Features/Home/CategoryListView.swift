@@ -21,7 +21,13 @@ struct CategoryListView: View {
                 VStack(alignment: .leading, spacing: 8){
                     ForEach(categories){
                         category in
-                        Button(action: {}){
+                        NavigationLink{
+                            ProductListView(products: allProducts.filter {
+                                $0.category == category.name
+                            }
+                            )
+                            .navigationBarBackButtonHidden()
+                        }label: {
                             HStack(spacing: 16){
                                 Image(category.imageName)
                                     .resizable()
@@ -42,28 +48,6 @@ struct CategoryListView: View {
         }
         .padding(.horizontal, 24)
         .background(.midnightViolet900)
-    }
-}
-
-struct BackButton:View {
-    @Environment(\.dismiss) var dismiss
-    var body: some View {
-        Button{
-            dismiss()
-        }label: {
-            Image("arrowleft2")
-                .renderingMode(.template)
-                .resizable()
-                .foregroundStyle(.shadowGrey900)
-                .scaledToFit()
-                .frame(width: 24)
-                .padding()
-                .background(.whiteSmoke50)
-                .clipShape(Circle())
-                
-        }
-        
-        
     }
 }
 
