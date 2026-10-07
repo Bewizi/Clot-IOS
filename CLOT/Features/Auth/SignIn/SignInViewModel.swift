@@ -34,6 +34,7 @@ final class SignInViewModel: ObservableObject{
             let response = try await NetworkManager.shared.login(email: email, password: password)
             
             authToken = response.token
+            UserDefaults.standard.set(response.token, forKey: "authToken")
             loginSucceeded = true
         }catch let error as APError {
             errorMessage = error.localizedDescription

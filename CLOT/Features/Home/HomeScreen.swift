@@ -10,21 +10,23 @@ import SwiftUI
 struct HomeScreen: View {
     
     @State private var searchItems = ""
-    
-    
-    
+    @State private var selectedGender = "Men"
     var body: some View {
         VStack(alignment: .leading){
             ZStack{
                 
                 Menu {
-                    Button("Men"){}
-                    Button("Women"){}
+                    Button("Men"){
+                        selectedGender = "Men"
+                    }
+                    Button("Women"){
+                        selectedGender = "Women"
+                    }
                 }label: {
                     
                     HStack(spacing: 4){
                         
-                        AppText(title: "Men", fontSize: 12, textColor: .shadowGrey900, fontWeight: .bold)
+                        AppText(title: selectedGender, fontSize: 12, textColor: .shadowGrey900, fontWeight: .bold)
                         
                         Image("arrowdown2")
                             .renderingMode(.template)
@@ -101,9 +103,6 @@ struct HomeScreen: View {
                         }
                     }
                 }
-                
-                
-                
             }
             .padding(.bottom, 24)
             
@@ -115,17 +114,12 @@ struct HomeScreen: View {
                     NewInView(products: NewInMock.newIn)
                 }
             }
-            
-            
-            
         }
         
         .padding(.top, 20)
         .padding(.horizontal, 24)
         .frame(maxHeight: .infinity)
         .background(.midnightViolet900)
-        
-        
     }
 }
 
