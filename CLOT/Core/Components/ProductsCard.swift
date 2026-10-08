@@ -41,5 +41,5 @@ struct ProductsCard: View {
 }
 
 #Preview {
-    ProductsCard(product:  Product(name: "Men's Fleece Pullover Hoodie", category: "Hoodies", image: "HarringtonJacket", price: 100.00))
+    ProductsCard(product:  Product(name: "Men's Fleece Pullover Hoodie", category: "Hoodies", image: "HarringtonJacket",description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00))
 }

@@ -41,7 +41,7 @@ struct HomeScreen: View {
                 HStack{
                     Spacer()
                     NavigationLink{
-                        EmptyView()
+                        CartScreen()
                             .navigationBarBackButtonHidden()
                     }label: {
                         Image("bag2")

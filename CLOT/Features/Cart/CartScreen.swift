@@ -11,7 +11,7 @@ struct CartScreen: View {
     var body: some View {
         VStack{
                 ZStack{
-                    AppText(title: "Orders", fontSize: 16, textColor: .shadowGrey900, fontWeight: .bold)
+                    AppText(title: "Cart", fontSize: 16, textColor: .shadowGrey900, fontWeight: .bold)
                     
                     HStack{
                         BackButton()
@@ -28,6 +28,7 @@ struct CartScreen: View {
                 AppText(title: "Your Cart is Empty", fontSize: 24, textColor: .shadowGrey900, fontWeight: .medium)
                 NavigationLink{
                     CategoryListView()
+                        .navigationBarBackButtonHidden()
                 }label: {
                     AppText(title: "Explore Categories", fontSize: 16, textColor: .white, fontWeight: .regular)
                 }
