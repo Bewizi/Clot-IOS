@@ -40,11 +40,16 @@ struct HomeScreen: View {
                 
                 HStack{
                     Spacer()
+                    NavigationLink{
+                        EmptyView()
+                            .navigationBarBackButtonHidden()
+                    }label: {
+                        Image("bag2")
+                            .padding()
+                            .background(.mediumSlateBlue300)
+                            .clipShape(Circle())
+                    }
                     
-                    Image("bag2")
-                        .padding()
-                        .background(.mediumSlateBlue300)
-                        .clipShape(Circle())
                     
                 }
                 
