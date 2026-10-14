@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ProductDetails: View {
     @State private var size = "S"
-    @State private var colours = Color.red
+    @State private var colorName = "Red"
+    @EnvironmentObject private var cart: CartStore
+    private var selectedColor: Color {
+        switch colorName { case "Orange": return .orange; case "Black": return .black; case "Yellow": return .yellow; case "Blue": return .blue; default: return .red }
+    }
     @State private var quantity = 1
     
     let product: Product
@@ -89,15 +93,15 @@ struct ProductDetails: View {
                         Spacer()
                         
                         Menu {
-                            Button("Orange"){colours = Color.orange}
-                            Button("Black"){colours = Color.black}
-                            Button("Red"){colours = Color.red}
-                            Button("Yellow"){colours = Color.yellow}
-                            Button("Blue"){colours = Color.blue}
+                            Button("Orange"){colorName = "Orange"}
+                            Button("Black"){colorName = "Black"}
+                            Button("Red"){colorName = "Red"}
+                            Button("Yellow"){colorName = "Yellow"}
+                            Button("Blue"){colorName = "Blue"}
                         }label: {
                             HStack(spacing: 29){
                                 Circle()
-                                    .foregroundStyle(colours)
+                                    .foregroundStyle(selectedColor)
                                     .frame(width: 16, height: 16)
                                 Image("arrowdown2")
                                     .resizable()
@@ -182,7 +186,7 @@ struct ProductDetails: View {
         .padding(.horizontal, 24)
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Button {
-                // Add the selected product, size, colour, and quantity to the bag.
+                cart.add(product: product, size: size, color: colorName, quantity: quantity)
             } label: {
                 HStack {
                     AppText(
@@ -217,4 +221,5 @@ struct ProductDetails: View {
 
 #Preview {
     ProductDetails(product: Product(name: "Men's Fleece Pullover Hoodie", category: "Hoodies", image: "HarringtonJacket",description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 148.00))
+        .environmentObject(CartStore())
 }
