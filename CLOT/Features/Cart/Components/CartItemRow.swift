@@ -28,14 +28,14 @@ struct CartItemRow: View {
             // Details & Attributes
             VStack(alignment: .leading, spacing: 12) {
                 AppText(title: title, fontSize: 12, fontWeight: .semibold, textAlignment: .leading)
-                    .fixedSize(horizontal: true, vertical: true)
+//                    .fixedSize(horizontal: true, vertical: true)
                     .lineLimit(1)
                 
                 HStack(spacing: 12) {
                     Text("Size - **\(size)**")
                     Text("Color - **\(color)**")
                 }
-                .fixedSize(horizontal: true, vertical: true)
+//                .fixedSize(horizontal: true, vertical: true)
                 .lineLimit(1)
                 .font(.system(size: 13))
                 .foregroundStyle(.secondary)

@@ -76,6 +76,8 @@ struct ProductDetails: View {
                                 AppText(title: size, fontSize: 16, textColor: .shadowGrey900, fontWeight: .bold, )
                                 Image("arrowdown2")
                                     .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundStyle(.shadowGrey900)
                                     .scaledToFit()
                                     .frame(width: 24)
                             }
@@ -105,8 +107,11 @@ struct ProductDetails: View {
                                     .frame(width: 16, height: 16)
                                 Image("arrowdown2")
                                     .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundStyle(.shadowGrey900)
                                     .scaledToFit()
                                     .frame(width: 24)
+                                    
                             }
                         }
                         
@@ -214,8 +219,8 @@ struct ProductDetails: View {
             }
             .padding(.horizontal, 24)
             .padding(.top, 12)
-            .background(.white)
         }
+        .background(.midnightViolet900)
     }
 }
 

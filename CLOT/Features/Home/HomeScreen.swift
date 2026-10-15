@@ -31,7 +31,6 @@ struct HomeScreen: View {
                         Image("arrowdown2")
                             .renderingMode(.template)
                             .foregroundStyle(.shadowGrey900)
-                            .foregroundStyle(.gray)
                     }
                 }
                 .padding()
