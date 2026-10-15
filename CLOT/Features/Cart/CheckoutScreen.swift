@@ -121,8 +121,11 @@ private struct CheckoutRowContent: View {
                 AppText(title: value, fontSize: 20, textColor: .shadowGrey900, fontWeight: .regular)
             }
             Spacer()
-            Image(systemName: "chevron.right")
-                .font(.system(size: 24, weight: .regular))
+            Image( "arrowright2")
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24, height: 24)
                 .foregroundStyle(.shadowGrey900)
         }
         .padding(.horizontal, 24)
