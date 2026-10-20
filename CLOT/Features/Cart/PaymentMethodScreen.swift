@@ -51,7 +51,7 @@ struct PaymentMethodScreen: View {
                 onSaved()
                 dismiss()
             } label: {
-                AppText(title: "Save Payment Method", fontSize: 16, textColor: .white, fontWeight: .medium)
+                AppText(title: "Save", fontSize: 16, textColor: .white, fontWeight: .medium)
                     .frame(maxWidth: .infinity)
                     .frame(height: 64)
                     .background(.mediumSlateBlue300)
