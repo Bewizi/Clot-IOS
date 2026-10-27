@@ -44,5 +44,5 @@ struct ProductListView: View {
 }
 
 #Preview {
-    ProductListView(products: [Product(name: "Fleece Skate Hoodie", category: "Hoodies", image: "HarringtonJacket", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 110)])
+    ProductListView(products: [Product(name: "Fleece Skate Hoodie", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 110)])
 }

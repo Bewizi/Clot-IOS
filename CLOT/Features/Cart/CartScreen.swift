@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CartScreen: View {
+    @State private var selectedGender: String = "male"
     @EnvironmentObject private var cart: CartStore
     var body: some View {
         VStack{
@@ -30,7 +31,7 @@ struct CartScreen: View {
                     .frame(width: 100)
                 AppText(title: "Your Cart is Empty", fontSize: 24, textColor: .shadowGrey900, fontWeight: .medium)
                 NavigationLink{
-                    CategoryListView()
+                    CategoryListView(selectedGender: $selectedGender)
                         .navigationBarBackButtonHidden()
                 }label: {
                     AppText(title: "Explore Categories", fontSize: 16, textColor: .white, fontWeight: .regular)

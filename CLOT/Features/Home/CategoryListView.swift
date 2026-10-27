@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct CategoryListView: View {
-    
-    
+    @Binding var selectedGender: String
     
     var body: some View {
         VStack(alignment: .leading){
@@ -23,7 +22,7 @@ struct CategoryListView: View {
                         category in
                         NavigationLink{
                             ProductListView(products: allProducts.filter {
-                                $0.category == category.name
+                                $0.gender == selectedGender && $0.category == category.name
                             }
                             )
                             .navigationBarBackButtonHidden()
@@ -52,5 +51,5 @@ struct CategoryListView: View {
 }
 
 #Preview {
-    CategoryListView()
+    CategoryListView(selectedGender: .constant("male"))
 }

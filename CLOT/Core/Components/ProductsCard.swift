@@ -28,7 +28,7 @@ struct ProductsCard: View {
             }
             
             VStack(alignment: .leading, spacing: 8) {
-                AppText(title: product.name, fontSize: 12, textColor: .shadowGrey900, fontWeight: .regular)
+                AppText(title: product.name, fontSize: 12, textColor: .shadowGrey900, fontWeight: .regular, textAlignment: .leading)
                 AppText(title: String(format:"$%.2f", product.price), fontSize: 12, textColor: .shadowGrey900, fontWeight: .bold)
             }
             .padding(.horizontal, 4)
@@ -41,5 +41,5 @@ struct ProductsCard: View {
 }
 
 #Preview {
-    ProductsCard(product:  Product(name: "Men's Fleece Pullover Hoodie", category: "Hoodies", image: "HarringtonJacket",description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00))
+    ProductsCard(product:  Product(name: "Men's Fleece Pullover Hoodie", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00))
 }

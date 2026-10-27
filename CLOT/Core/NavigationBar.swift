@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NavigationBar: View {
     @State private var selectedTab = 0
+    @State private var selectedGender = "male"
     
     var body: some View {
         NavigationStack{
@@ -18,7 +19,7 @@ struct NavigationBar: View {
                 Group {
                     switch selectedTab {
                     case 0:
-                        HomeScreen()
+                        HomeScreen(selectedGender: $selectedGender)
                         
                     case 1:
                         NotificationsScreen()
@@ -30,7 +31,7 @@ struct NavigationBar: View {
                         Profile()
                         
                     default:
-                        HomeScreen()
+                        HomeScreen(selectedGender: $selectedGender)
                     }
                 }
                 

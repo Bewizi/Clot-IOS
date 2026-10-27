@@ -10,23 +10,31 @@ import SwiftUI
 struct HomeScreen: View {
     
     @State private var searchItems = ""
-    @State private var selectedGender = "Men"
+    @Binding var selectedGender: String
+
+    private var genderLabel: String {
+        selectedGender == "male" ? "Men" : "Women"
+    }
+
+    private var selectedProducts: [Product] {
+        allProducts.filter { $0.gender == selectedGender }
+    }
     var body: some View {
         VStack(alignment: .leading){
             ZStack{
                 
                 Menu {
                     Button("Men"){
-                        selectedGender = "Men"
+                        selectedGender = "male"
                     }
                     Button("Women"){
-                        selectedGender = "Women"
+                        selectedGender = "female"
                     }
                 }label: {
                     
                     HStack(spacing: 4){
                         
-                        AppText(title: selectedGender, fontSize: 12, textColor: .shadowGrey900, fontWeight: .bold)
+                        AppText(title: genderLabel, fontSize: 12, textColor: .shadowGrey900, fontWeight: .bold)
                         
                         Image("arrowdown2")
                             .renderingMode(.template)
@@ -82,7 +90,7 @@ struct HomeScreen: View {
                     AppText(title: "Categories", fontSize: 16, textColor: .shadowGrey900, fontWeight: .bold)
                     Spacer()
                     NavigationLink {
-                        CategoryListView()
+                        CategoryListView(selectedGender: $selectedGender)
                             .navigationBarBackButtonHidden()
                     } label: {
                         AppText(title: "See All", fontSize: 16, textColor: .shadowGrey900, fontWeight: .regular)
@@ -94,7 +102,12 @@ struct HomeScreen: View {
                     HStack(spacing: 20){
                         ForEach(categories){
                             category in
-                            Button(action: {}){
+                            NavigationLink {
+                                ProductListView(products: selectedProducts.filter {
+                                    $0.category == category.name
+                                })
+                                .navigationBarBackButtonHidden()
+                            } label: {
                                 VStack(spacing: 5){
                                     Image(category.imageName)
                                         .resizable()
@@ -128,6 +141,6 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen()
+    HomeScreen(selectedGender: .constant("male"))
 }
 
