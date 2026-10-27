@@ -10,6 +10,7 @@ import SwiftUI
 struct CheckoutScreen: View {
     @EnvironmentObject private var cart: CartStore
     @State private var hasPaymentMethod = false
+    @State private var hasAddressMethod = false
 
     private var shippingCost: Double { cart.items.isEmpty ? 0 : 8 }
     private var total: Double { cart.subtotal + shippingCost }
@@ -28,9 +29,13 @@ struct CheckoutScreen: View {
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
-                    CheckoutRow(title: "Shipping Address", value: "Add Shipping Address") {
-                        // Address entry can be connected here when that flow is added.
+                    NavigationLink{
+                        AddressMethodScreen( onSaved: {hasAddressMethod = true})
+                            .navigationBarBackButtonHidden()
+                    }label: {
+                        CheckoutRowContent(title: "Shipping Address", value: hasAddressMethod ? "Shipping Address ...": "Add Shipping Address")
                     }
+                    
 
                     NavigationLink {
                         PaymentMethodScreen(onSaved: { hasPaymentMethod = true })

@@ -33,11 +33,15 @@ struct Profile: View {
                                     AddressMethodScreen(onSaved: {})
                     .navigationBarBackButtonHidden()
                 )
-                ProfileMenuTile(title: "Wishlist", destination: Text("Address"))
+                
+                ProfileMenuTile(title: "Wishlist", destination: WishlistScreen().navigationBarBackButtonHidden())
+                
                 ProfileMenuTile(title: "Payment", destination: PaymentMethodScreen(onSaved: {})
                     .navigationBarBackButtonHidden()
                 )
+                
                 ProfileMenuTile(title: "Help", destination: Text("Address"))
+                
                 ProfileMenuTile(title: "Support", destination: Text("Address"))
             }
             
