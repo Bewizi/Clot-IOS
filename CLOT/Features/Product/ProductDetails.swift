@@ -10,6 +10,7 @@ import SwiftUI
 struct ProductDetails: View {
     @State private var size = "S"
     @State private var colorName = "Red"
+    @State private var isLiked = false
     @EnvironmentObject private var cart: CartStore
     private var selectedColor: Color {
         switch colorName { case "Orange": return .orange; case "Black": return .black; case "Yellow": return .yellow; case "Blue": return .blue; default: return .red }
@@ -33,15 +34,18 @@ struct ProductDetails: View {
             HStack{
                 BackButton()
                 Spacer()
-                Image("heart")
-                    .renderingMode(.template)
-                    .resizable()
-                    .foregroundStyle(.shadowGrey900)
-                    .scaledToFit()
-                    .frame(width: 24)
-                    .padding()
-                    .background(.whiteSmoke50)
-                    .clipShape(Circle())
+                Button{isLiked.toggle()} label: {
+                    Image(isLiked ? "heart 2" : "heart")
+                        .renderingMode(.template)
+                        .resizable()
+                        .foregroundStyle(isLiked ? .red : .shadowGrey900)
+                        .scaledToFit()
+                        .frame(width: 24)
+                        .padding()
+                        .background(.whiteSmoke50)
+                        .clipShape(Circle())
+                }
+               
             }
             
             VStack(alignment: .leading, spacing: 24){

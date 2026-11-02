@@ -7,45 +7,66 @@
 
 import SwiftUI
 
-struct ProductsCard: View {
-    let product: Product
-    @State private var isLiked = false
+protocol ProductDisplayable: Identifiable {
+    var displayName: String { get }
+    var displayImageName: String { get }
+    var displayPriceText: String { get }
+}
 
-    private func toggleLike() {
-        isLiked.toggle()
-    }
+
+// Conform Product
+extension Product: ProductDisplayable {
+    var id: String { name } 
+    var displayName: String { name }
+    var displayImageName: String { image }
+    var displayPriceText: String { String(format: "$%.2f", price) }
+}
+
+// Conform TopSellingModel
+extension TopSellingModel: ProductDisplayable {
+    var displayName: String { productName }
+    var displayImageName: String { image }
+    var displayPriceText: String { price } // already formatted
+}
+
+// Conform NewInModel
+extension NewInModel: ProductDisplayable {
+    var displayName: String { productName }
+    var displayImageName: String { image }
+    var displayPriceText: String { price } // already formatted
+}
+
+
+
+// Generic card
+struct ProductsCard<Item: ProductDisplayable>: View {
+    let product: Item
+    @State private var isLiked = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .topTrailing) {
-                Image(product.image)
+                Image(product.displayImageName)
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: .infinity)
                     .frame(height: 200)
-                
-                Button(action: toggleLike) {
-                    isLiked ?
-                    Image("heart 2")
+
+                Button { isLiked.toggle() } label: {
+                    // your like UI
+                    Image(isLiked ? "heart 2" : "heart")
                         .renderingMode(.template)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20, height: 20)
-                        .foregroundStyle(.red)
-                        .padding(12) :
-                    Image("heart")
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20)
-                        .foregroundStyle(.navColor900)
+                        .foregroundStyle(isLiked ? .red : .navColor900)
                         .padding(12)
                 }
             }
-            
+
             VStack(alignment: .leading, spacing: 8) {
-                AppText(title: product.name, fontSize: 12, textColor: .shadowGrey900, fontWeight: .regular, textAlignment: .leading)
-                AppText(title: String(format:"$%.2f", product.price), fontSize: 12, textColor: .shadowGrey900, fontWeight: .bold)
+                AppText(title: product.displayName, fontSize: 12, textColor: .shadowGrey900, fontWeight: .regular, textAlignment: .leading)
+                AppText(title: product.displayPriceText, fontSize: 12, textColor: .shadowGrey900, fontWeight: .bold)
             }
             .padding(.horizontal, 4)
             .padding(.top, 8)
@@ -55,6 +76,7 @@ struct ProductsCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 }
+
 
 #Preview {
     ProductsCard(product:  Product(name: "Men's Fleece Pullover Hoodie", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00))

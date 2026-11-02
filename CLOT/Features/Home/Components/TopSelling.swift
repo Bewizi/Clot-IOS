@@ -16,8 +16,14 @@ struct TopSelling: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(alignment: .top, spacing: 12) {
-                    ForEach(products) { product in
-                        ProductCard(product: product)
+                    ForEach(products) { t in
+                        NavigationLink{
+                            ProductDetails(product: Product(name: t.productName, category: "Top Selling", image: t.image, gender: t.gender, description: nil, price: Double(t.price.replacingOccurrences(of: "$", with: "")) ?? 0))
+                                .navigationBarBackButtonHidden()
+                        }label: {
+                            ProductsCard(product: t)
+                        }
+                        
                             
                     }
                 }
