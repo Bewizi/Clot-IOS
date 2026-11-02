@@ -24,9 +24,11 @@ struct NotificationCardView: View {
 //            icon
             ZStack(alignment:.topTrailing){
                 Image("notificationbing")
+                    .renderingMode(.template)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)
+                    .foregroundStyle(.shadowGrey900)
                 
                 if notification.isUnread{
                     Circle()

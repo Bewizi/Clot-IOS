@@ -65,8 +65,9 @@ struct CheckoutScreen: View {
         .frame(maxHeight: .infinity)
         .background(.midnightViolet900)
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            Button {
-               
+            NavigationLink {
+               OrderSuccessfulView()
+                    .navigationBarBackButtonHidden()
             } label: {
                 HStack {
                     AppText(
