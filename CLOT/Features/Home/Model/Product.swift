@@ -64,6 +64,15 @@ let allProducts: [Product] = [
         price: 52.97
     ),
     
+    Product(
+        name: "ASOS DESIGN extreme oversized hoodie with back print in navy",
+        category: "Hoodies",
+        image: "extreme oversized hoodie with back print in navy",
+        gender: "male",
+        description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
+        price: 54.00
+    ),
+    
 //    shorts
     Product(
         name: "Jack & Jones lounge shorts in black",

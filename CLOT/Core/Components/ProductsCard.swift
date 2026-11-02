@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct ProductsCard: View {
-    let product : Product
+    let product: Product
+    @State private var isLiked = false
+
+    private func toggleLike() {
+        isLiked.toggle()
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .topTrailing) {
@@ -18,13 +24,23 @@ struct ProductsCard: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 200)
                 
-                Image("heart")
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 20, height: 20)
-                    .foregroundStyle(.shadowGrey900)
-                    .padding(12)
+                Button(action: toggleLike) {
+                    isLiked ?
+                    Image("heart 2")
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundStyle(.red)
+                        .padding(12) :
+                    Image("heart")
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundStyle(.navColor900)
+                        .padding(12)
+                }
             }
             
             VStack(alignment: .leading, spacing: 8) {
