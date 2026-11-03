@@ -16,27 +16,11 @@ protocol ProductDisplayable: Identifiable {
 
 // Conform Product
 extension Product: ProductDisplayable {
-    var id: String { name } 
+//    var id: String { name } 
     var displayName: String { name }
     var displayImageName: String { image }
     var displayPriceText: String { String(format: "$%.2f", price) }
 }
-
-// Conform TopSellingModel
-extension TopSellingModel: ProductDisplayable {
-    var displayName: String { productName }
-    var displayImageName: String { image }
-    var displayPriceText: String { price } // already formatted
-}
-
-// Conform NewInModel
-extension NewInModel: ProductDisplayable {
-    var displayName: String { productName }
-    var displayImageName: String { image }
-    var displayPriceText: String { price } // already formatted
-}
-
-
 
 // Generic card
 struct ProductsCard<Item: ProductDisplayable>: View {
@@ -79,5 +63,5 @@ struct ProductsCard<Item: ProductDisplayable>: View {
 
 
 #Preview {
-    ProductsCard(product:  Product(name: "Men's Fleece Pullover Hoodie", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00))
+    ProductsCard(product:  Product(name: "Men's Fleece Pullover Hoodie", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00,status: "newIn"))
 }

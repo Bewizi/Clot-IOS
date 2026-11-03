@@ -125,10 +125,10 @@ struct HomeScreen: View {
             
             ScrollView(showsIndicators:false){
                 VStack(alignment: .leading, spacing: 24){
-                    TopSelling(products: TopSellingMock.topSelling)
+                    TopSelling(products: allProducts.filter { $0.status == "topSelling" })
                         
                     
-                    NewInView(products: NewInMock.newIn)
+                    NewInView(products: allProducts.filter { $0.status == "newIn" })
                 }
             }
         }

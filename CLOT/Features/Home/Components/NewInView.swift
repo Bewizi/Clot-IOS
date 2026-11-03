@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewInView: View {
-    let products: [NewInModel]
+    let products: [Product]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -23,12 +23,12 @@ struct NewInView: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(alignment: .top, spacing: 12) {
-                    ForEach(products) { n in
+                    ForEach(products) { product in
                         NavigationLink{
-                            ProductDetails(product: Product(name: n.productName, category: "New In", image: n.image, gender: "", description: nil, price: Double(n.price.replacingOccurrences(of: "$", with: "")) ?? 0))
+                            ProductDetails(product: product)
                                 .navigationBarBackButtonHidden()
                         }label: {
-                            ProductsCard(product: n)
+                            ProductsCard(product: product)
                         }
                         
                             
@@ -39,41 +39,7 @@ struct NewInView: View {
     }
 }
 
-private struct ProductCard: View {
-    let product: NewInModel
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            ZStack(alignment: .topTrailing) {
-                Image(product.image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 200)
-
-                Image("heart")
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 20, height: 20)
-                    .foregroundStyle(.shadowGrey900)
-                    .padding(12)
-            }
-
-            VStack(alignment: .leading, spacing: 8) {
-                AppText(title: product.productName, fontSize: 12, textColor: .shadowGrey900, fontWeight: .regular)
-                AppText(title: product.price, fontSize: 12, textColor: .shadowGrey900, fontWeight: .bold)
-            }
-            .padding(.horizontal, 4)
-            .padding(.top, 8)
-            .padding(.bottom, 16)
-        }
-        .background(.whiteSmoke50)
-        .clipShape(RoundedRectangle(cornerRadius: 8))
-    }
-}
-
 #Preview {
-    NewInView(products: NewInMock.newIn)
+    NewInView(products: allProducts.filter { $0.status == "newIn" })
 }
 

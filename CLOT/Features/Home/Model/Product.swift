@@ -7,13 +7,16 @@
 
 import Foundation
 
-struct Product {
+struct Product: Identifiable {
     let name: String
     let category: String
     let image: String
     let gender: String
     let description: String?
     let price: Double
+    let status: String
+
+    var id: String { name }
 }
 
 let allProducts: [Product] = [
@@ -25,7 +28,8 @@ let allProducts: [Product] = [
         image: "HarringtonJacket",
         gender: "male",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 100
+        price: 100,
+        status: "newIn"
     ),
     
     Product(
@@ -34,7 +38,8 @@ let allProducts: [Product] = [
         image: "oversized hoodie with large print in brown",
         gender: "female",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 159.97
+        price: 159.97,
+        status: "topSelling"
     ),
     
     Product(
@@ -43,7 +48,8 @@ let allProducts: [Product] = [
         image: "ali-saadat",
         gender: "male",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 110
+        price: 110,
+        status: "newIn"
     ),
     
     Product(
@@ -52,7 +58,8 @@ let allProducts: [Product] = [
         image: "Hollister boxy fit hoodie in black",
         gender: "female",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 128.97
+        price: 128.97,
+        status: "topSelling"
     ),
     
     Product(
@@ -61,7 +68,8 @@ let allProducts: [Product] = [
         image: "Cotton On box fit hoodie in slate",
         gender: "male",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 52.97
+        price: 52.97,
+        status: "newIn"
     ),
     
     Product(
@@ -70,7 +78,8 @@ let allProducts: [Product] = [
         image: "extreme oversized hoodie with back print in navy",
         gender: "male",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 54.00
+        price: 54.00,
+        status: "topSelling"
     ),
     
 //    shorts
@@ -80,7 +89,8 @@ let allProducts: [Product] = [
         image: "Jack & Jones lounge shorts in black",
         gender: "female",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 60
+        price: 60,
+        status: "newIn"
     ),
     
     Product(
@@ -89,7 +99,8 @@ let allProducts: [Product] = [
         image: "5 inch quick dry training shorts with zip pockets in caper",
         gender: "male",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 34
+        price: 34,
+        status: "newIn"
     ),
     
 //    accessories
@@ -99,7 +110,8 @@ let allProducts: [Product] = [
         image: "HarringtonJacket",
         gender: "female",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 60
+        price: 60,
+        status: "newIn"
     ),
 
     //    shoes
@@ -109,7 +121,8 @@ let allProducts: [Product] = [
         image: "HarringtonJacket",
         gender: "male",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 60
+        price: 60,
+        status: "newIn"
     ),
     
     //   bags
@@ -119,6 +132,7 @@ let allProducts: [Product] = [
         image: "HarringtonJacket",
         gender: "female",
         description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.",
-        price: 60
+        price: 60,
+        status: "newIn"
     )
 ]
