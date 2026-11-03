@@ -3,6 +3,7 @@ import SwiftUI
 struct UserPreferencesView: View {
     let token: String
     @StateObject private var viewModel = UserPreferencesViewModel()
+    @State private var selectedGender = "male"
 
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
@@ -27,6 +28,7 @@ struct UserPreferencesView: View {
                         isSelected: viewModel.selectedShoppingFor == "men"
                     ) {
                         viewModel.selectedShoppingFor = "men"
+                        selectedGender = "male"
                     }
 
                     GenderSelectionButton(
@@ -34,6 +36,7 @@ struct UserPreferencesView: View {
                         isSelected: viewModel.selectedShoppingFor == "women"
                     ) {
                         viewModel.selectedShoppingFor = "women"
+                        selectedGender = "female"
                     }
                 }
             }
@@ -84,7 +87,7 @@ struct UserPreferencesView: View {
                         ProgressView()
                             .tint(.white)
                     } else {
-                        Text("Finish")
+                        AppText(title: "Finish", fontSize: 16, textColor: .white, fontWeight: .medium)
                     }
                 }
                 .font(.system(size: 16, weight: .semibold))
@@ -98,6 +101,10 @@ struct UserPreferencesView: View {
         .padding(.horizontal, 24)
         .background(.whiteSmoke50)
         .safeAreaInset(edge: .bottom) {}
+        .navigationDestination(isPresented: $viewModel.saveSucceeded) {
+            HomeScreen(selectedGender: $selectedGender)
+                .navigationBarBackButtonHidden()
+        }
         .alert(
             "Preferences Error",
             isPresented: Binding(
@@ -112,4 +119,8 @@ struct UserPreferencesView: View {
             Text(viewModel.errorMessage ?? "")
         }
     }
+}
+
+#Preview {
+    UserPreferencesView(token: "preview-token")
 }

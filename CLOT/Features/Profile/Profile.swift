@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Profile: View {
+    @EnvironmentObject private var session: SessionManager
+
     var body: some View {
         VStack{
             VStack(alignment: .leading){
@@ -46,7 +48,9 @@ struct Profile: View {
             }
             
             VStack{
-                Button{}label: {
+                Button {
+                    session.logOut()
+                } label: {
                     AppText(title: "Sign Out", fontSize: 16, textColor: .cinnabar400, fontWeight: .bold)
                 }
             }
@@ -87,4 +91,5 @@ struct ProfileMenuTile<Destination: View>: View {
 
 #Preview {
     Profile()
+        .environmentObject(SessionManager())
 }

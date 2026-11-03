@@ -26,7 +26,7 @@ final class SignUpViewModel: ObservableObject {
     
     func register() async{
         guard isFormValid else{
-            errorMessage = "Please complete all field correctly."
+            errorMessage = "Enter your first name, last name, a valid email address, and a password with at least 8 characters."
             return
         }
         
@@ -48,6 +48,12 @@ final class SignUpViewModel: ObservableObject {
     }
     
     private func isValidEmail(_ email: String)->Bool {
-        email.contains("@") && email.contains(".")
+        let email = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let pattern = #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#
+
+        return email.range(
+            of: pattern,
+            options: [.regularExpression, .caseInsensitive]
+        ) != nil
     }
 }
