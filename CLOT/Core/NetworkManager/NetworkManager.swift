@@ -130,7 +130,7 @@ struct LoginResponse: Decodable {
     let user: UserResponse
 }
 
-struct UserResponse: Decodable {
+struct UserResponse: Codable {
     let id: String
     let firstname: String
     let lastname: String

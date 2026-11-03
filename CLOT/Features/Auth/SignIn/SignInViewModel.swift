@@ -15,6 +15,7 @@ final class SignInViewModel: ObservableObject{
     @Published var loginSucceeded = false
     @Published var errorMessage: String?
     @Published var authToken: String?
+    @Published var authenticatedUser: UserResponse?
     
     var isSignInFormValid:Bool{
         email.contains("@") &&
@@ -34,6 +35,7 @@ final class SignInViewModel: ObservableObject{
             let response = try await NetworkManager.shared.login(email: email, password: password)
             
             authToken = response.token
+            authenticatedUser = response.user
             UserDefaults.standard.set(response.token, forKey: "authToken")
             loginSucceeded = true
         }catch let error as APError {

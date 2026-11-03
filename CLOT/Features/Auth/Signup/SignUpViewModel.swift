@@ -14,6 +14,7 @@ final class SignUpViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var registrationSucceeded = false
     @Published var authToken: String?
+    @Published var authenticatedUser: UserResponse?
     
     
     
@@ -38,6 +39,7 @@ final class SignUpViewModel: ObservableObject {
 
                      
             authToken = response.token
+            authenticatedUser = response.user
             registrationSucceeded = true
         }catch let error as APError {
             errorMessage = error.localizedDescription

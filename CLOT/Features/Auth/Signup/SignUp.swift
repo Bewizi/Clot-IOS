@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SignUp: View {
     @StateObject var viewModel = SignUpViewModel()
+    @EnvironmentObject private var session: SessionManager
     @State private var isPasswordVisible = false
     
     var body: some View {
@@ -47,6 +48,11 @@ struct SignUp: View {
             Button {
                 Task {
                     await viewModel.register()
+                    if viewModel.registrationSucceeded,
+                       let token = viewModel.authToken,
+                       let user = viewModel.authenticatedUser {
+                        session.saveSession(token: token, user: user)
+                    }
                 }
             }label: {
                 Group{

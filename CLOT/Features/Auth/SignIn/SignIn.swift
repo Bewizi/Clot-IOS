@@ -62,6 +62,7 @@ struct SignIn: View {
 
 struct PasswordScreen:View {
     @ObservedObject  var viewModel: SignInViewModel
+    @EnvironmentObject private var session: SessionManager
     
     @State private var isPasswordVisible = false
     var body: some View {
@@ -104,6 +105,11 @@ struct PasswordScreen:View {
                 Button{
                     Task {
                         await viewModel.login()
+                        if viewModel.loginSucceeded,
+                           let token = viewModel.authToken,
+                           let user = viewModel.authenticatedUser {
+                            session.saveSession(token: token, user: user)
+                        }
                     }
                 }label: {
                     Group{

@@ -15,8 +15,19 @@ struct Profile: View {
             VStack(alignment: .leading){
                 HStack{
                     VStack(alignment: .leading, spacing: 8){
-                        AppText(title: "Gilbert Jones", fontSize: 16, fontWeight: .bold)
-                        AppText(title: "Glbertjones001@gmail.com")
+                        AppText(
+                            title: [session.currentUser?.firstname ?? "Gilbert", session.currentUser?.lastname ?? "Jones"]
+                                .compactMap { $0 }
+                                .joined(separator: " "),
+                            fontSize: 16,
+                            textColor: .shadowGrey900,
+                            fontWeight: .bold
+                        )
+                        AppText(title: session.currentUser?.email ?? "Glbertjones001@gmail.com",
+                                fontSize: 16,
+                                textColor: .shadowGrey900.opacity(0.5),
+                                fontWeight: .regular
+                        )
                     }
                     Spacer()
                     Button{}label: {
