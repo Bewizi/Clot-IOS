@@ -30,14 +30,36 @@ struct ProductsCard<Item: ProductDisplayable>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .topTrailing) {
-                Image(product.displayImageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 200)
+                AsyncImage(url: URL(string: product.displayImageName)) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 200)
+                    case .failure(_):
+                        // Fallback if image fails to load
+                        Color.gray.opacity(0.2)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 200)
+                            .overlay(
+                                Image(systemName: "photo")
+                                    .foregroundStyle(.secondary)
+                            )
+                    case .empty:
+                        // Placeholder while loading
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 200)
+                    @unknown default:
+                        Color.gray.opacity(0.2)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 200)
+                    }
+                }
 
                 Button { isLiked.toggle() } label: {
-                    // your like UI
                     Image(isLiked ? "heart 2" : "heart")
                         .renderingMode(.template)
                         .resizable()
@@ -68,3 +90,4 @@ struct ProductsCard<Item: ProductDisplayable>: View {
 #Preview {
     ProductsCard(product:  Product(id: "preview-1", name: "ASOS DESIGN extreme oversized\n hoodie with back print in navy", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00,status: "newIn"))
 }
+

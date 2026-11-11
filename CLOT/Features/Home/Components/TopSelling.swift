@@ -2,18 +2,24 @@ import SwiftUI
 
 struct TopSelling: View {
     let products: [Product]
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 AppText(title: "Top Selling", fontSize: 16, textColor: .shadowGrey900, fontWeight: .bold)
                 Spacer()
-                NavigationLink(destination: EmptyView()) {
+                NavigationLink{
+                    TopSellingProduct(products: products)
+                        .navigationBarBackButtonHidden()
+                }
+            label:
+                {
                     AppText(title: "See All", fontSize: 16, textColor: .shadowGrey900, fontWeight: .regular)
                 }
+                .navigationBarBackButtonHidden()
             }
             .padding(.bottom, 16)
-
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(alignment: .top, spacing: 12) {
                     ForEach(products) { product in
@@ -23,8 +29,6 @@ struct TopSelling: View {
                         }label: {
                             ProductsCard(product: product)
                         }
-                        
-                            
                     }
                 }
             }

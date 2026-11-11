@@ -15,7 +15,12 @@ struct NewInView: View {
             HStack {
                 AppText(title: "New In", fontSize: 16, textColor: .mediumSlateBlue300, fontWeight: .bold)
                 Spacer()
-                NavigationLink(destination: EmptyView()) {
+                NavigationLink {
+                    NewInSellingProduct(products: products)
+                        .navigationBarBackButtonHidden()
+                }
+                
+                label: {
                     AppText(title: "See All", fontSize: 16, textColor: .shadowGrey900, fontWeight: .regular)
                 }
             }
@@ -29,9 +34,7 @@ struct NewInView: View {
                                 .navigationBarBackButtonHidden()
                         }label: {
                             ProductsCard(product: product)
-                        }
-                        
-                            
+                        }   
                     }
                 }
             }
