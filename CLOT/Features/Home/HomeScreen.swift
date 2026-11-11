@@ -127,10 +127,10 @@ struct HomeScreen: View {
             
             ScrollView(showsIndicators:false){
                 VStack(alignment: .leading, spacing: 24){
-                    TopSelling(products: viewModel.products.filter { $0.status == "topSelling" })
+                    TopSelling(products: viewModel.products.filter { $0.status == "topSelling" }, isLoading: viewModel.isLoading)
                         
                     
-                    NewInView(products: viewModel.products.filter { $0.status == "newIn" })
+                    NewInView(products: viewModel.products.filter { $0.status == "newIn" }, isLoading: viewModel.isLoading)
                 }
             }
         }

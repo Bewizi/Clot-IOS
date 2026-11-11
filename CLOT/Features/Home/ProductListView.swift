@@ -14,6 +14,7 @@ struct ProductListView: View {
     ]
     
     let products: [Product]
+    let isLoading = false
 
     var body: some View {
         VStack(alignment: .leading){
@@ -26,11 +27,16 @@ struct ProductListView: View {
             ScrollView(showsIndicators: false){
                 LazyVGrid(columns: columns, spacing: 12){
                     ForEach(products, id: \.name) { product in
-                        NavigationLink{
-                            ProductDetails(product: product)
-                                .navigationBarBackButtonHidden()
-                        }label: {
-                            ProductsCard(product: product)
+                        if isLoading {
+                            ProductsCard(product: product, isLoading: true)
+                        }else
+                        {
+                            NavigationLink{
+                                ProductDetails(product: product)
+                                    .navigationBarBackButtonHidden()
+                            }label: {
+                                ProductsCard(product: product, isLoading: false)
+                            }
                         }
                     }
                     

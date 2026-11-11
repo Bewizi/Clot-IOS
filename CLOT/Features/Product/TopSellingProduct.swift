@@ -14,7 +14,7 @@ struct TopSellingProduct: View {
     ]
     
     let products: [Product]
-    
+    let isLoading = false
     private var topSellingProducts: [Product] {
         products.filter{$0.status == "topSelling"}
     }
@@ -26,12 +26,18 @@ struct TopSellingProduct: View {
             ScrollView(showsIndicators: false){
                 LazyVGrid(columns: columns, spacing: 12){
                     ForEach(topSellingProducts) { product in
-                        NavigationLink{
-                            ProductDetails(product: product)
-                                .navigationBarBackButtonHidden()
-                        }label: {
-                            ProductsCard(product: product)
+                        
+                        if isLoading{
+                            ProductsCard(product: product, isLoading: true)
+                        }else{
+                            NavigationLink{
+                                ProductDetails(product: product)
+                                    .navigationBarBackButtonHidden()
+                            }label: {
+                                ProductsCard(product: product, isLoading: false)
+                            }
                         }
+                        
                     }
                     
                 }

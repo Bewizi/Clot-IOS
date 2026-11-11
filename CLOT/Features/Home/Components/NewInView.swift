@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewInView: View {
     let products: [Product]
+    let isLoading: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -29,12 +30,13 @@ struct NewInView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(alignment: .top, spacing: 12) {
                     ForEach(products) { product in
+                        
                         NavigationLink{
                             ProductDetails(product: product)
                                 .navigationBarBackButtonHidden()
                         }label: {
-                            ProductsCard(product: product)
-                        }   
+                            ProductsCard(product: product, isLoading: isLoading)
+                        }
                     }
                 }
             }
@@ -43,6 +45,6 @@ struct NewInView: View {
 }
 
 #Preview {
-    NewInView(products: allProducts.filter { $0.status == "newIn" })
+    NewInView(products: allProducts.filter { $0.status == "newIn" }, isLoading: true)
 }
 

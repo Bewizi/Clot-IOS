@@ -27,6 +27,18 @@ struct ProductResponse: Codable{
     let product: Product
 }
 
+extension Product {
+    static let placeholder = Product(
+        id: "placeholder",
+        name: "Product name",
+        category: "Category",
+        image: "",
+        gender: "male",
+        description: nil,
+        price: 0,
+        status: "newIn"
+    )
+}
 
 
 
@@ -34,7 +46,7 @@ struct ProductResponse: Codable{
 
 let allProducts: [Product] = [
     
-//    hoodies
+    //    hoodies
     Product(
         id: "preview-1",
         name: "Men's Fleece Pullover Hoodie",
@@ -101,7 +113,7 @@ let allProducts: [Product] = [
         status: "topSelling"
     ),
     
-//    shorts
+    //    shorts
     Product(
         id: "preview-7",
         name: "Jack & Jones lounge shorts in black",
@@ -124,7 +136,7 @@ let allProducts: [Product] = [
         status: "newIn"
     ),
     
-//    accessories
+    //    accessories
     Product(
         id: "preview-9",
         name: "Accessories",
@@ -135,7 +147,7 @@ let allProducts: [Product] = [
         price: 60,
         status: "newIn"
     ),
-
+    
     //    shoes
     Product(
         id: "preview-10",

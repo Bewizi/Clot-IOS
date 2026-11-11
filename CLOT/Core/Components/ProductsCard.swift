@@ -26,6 +26,7 @@ extension Product: ProductDisplayable {
 struct ProductsCard<Item: ProductDisplayable>: View {
     let product: Item
     @State private var isLiked = false
+    let isLoading: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -83,11 +84,12 @@ struct ProductsCard<Item: ProductDisplayable>: View {
         .frame(maxWidth: 150, alignment: .center)
         .background(.whiteSmoke50)
         .clipShape(RoundedRectangle(cornerRadius: 8))
+        .redacted(reason: isLoading ? .placeholder : [])
     }
 }
 
 
 #Preview {
-    ProductsCard(product:  Product(id: "preview-1", name: "ASOS DESIGN extreme oversized\n hoodie with back print in navy", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00,status: "newIn"))
+    ProductsCard(product:  Product(id: "preview-1", name: "ASOS DESIGN extreme oversized\n hoodie with back print in navy", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00,status: "newIn"), isLoading: true)
 }
 
