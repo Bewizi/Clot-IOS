@@ -10,7 +10,7 @@ import Foundation
 final class NetworkManager {
     static let shared = NetworkManager()
     
-    private let baseURL = "http://localhost:8000/api"
+    private let baseURL = "https://1543-105-113-83-24.ngrok-free.app/api"
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     
@@ -94,6 +94,43 @@ final class NetworkManager {
             throw APError.unableToComplete
         }
     }
+    
+    func get<Response: Decodable>(
+        path: String
+    ) async throws -> Response{
+        guard let url = URL(string: baseURL + path)
+                else{
+            throw APError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        do{
+            let(data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse
+                    else{
+                throw APError.invalidResponse
+            }
+            
+            guard(200...299).contains(httpResponse.statusCode) else{
+                let serverError = try? decoder.decode(ServerErrorResponse.self, from: data)
+                throw APError.server(message: serverError?.message ?? "The request failed")
+                
+            }
+            do {
+                return try decoder.decode(Response.self, from: data)
+            }catch {
+                throw APError.invalidData
+            }
+        }catch let error as APError{
+            throw error
+        }catch {
+            throw APError.unableToComplete
+        }
+    }
 }
 
 private struct LoginRequest: Encodable {
@@ -137,6 +174,6 @@ struct UserResponse: Codable {
     let email: String
 }
 
-private struct ServerErrorResponse: Decodable {
+    struct ServerErrorResponse: Decodable {
     let message: String
 }

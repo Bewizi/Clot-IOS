@@ -48,11 +48,11 @@ struct SignUp: View {
             Button {
                 Task {
                     await viewModel.register()
-                    if viewModel.registrationSucceeded,
-                       let token = viewModel.authToken,
-                       let user = viewModel.authenticatedUser {
-                        session.saveSession(token: token, user: user)
-                    }
+//                    if viewModel.registrationSucceeded,
+//                       let token = viewModel.authToken,
+//                       let user = viewModel.authenticatedUser {
+//                        session.saveSession(token: token, user: user)
+//                    }
                 }
             }label: {
                 Group{

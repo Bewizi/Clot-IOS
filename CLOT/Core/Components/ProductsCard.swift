@@ -50,12 +50,15 @@ struct ProductsCard<Item: ProductDisplayable>: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 AppText(title: product.displayName, fontSize: 12, textColor: .shadowGrey900, fontWeight: .regular, textAlignment: .leading)
+                    .lineLimit(1)
+                    .minimumScaleFactor(2)
                 AppText(title: product.displayPriceText, fontSize: 12, textColor: .shadowGrey900, fontWeight: .bold)
             }
             .padding(.horizontal, 4)
             .padding(.top, 8)
             .padding(.bottom, 16)
         }
+        .frame(maxWidth: 150, alignment: .center)
         .background(.whiteSmoke50)
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
@@ -63,5 +66,5 @@ struct ProductsCard<Item: ProductDisplayable>: View {
 
 
 #Preview {
-    ProductsCard(product:  Product(name: "Men's Fleece Pullover Hoodie", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00,status: "newIn"))
+    ProductsCard(product:  Product(id: "preview-1", name: "ASOS DESIGN extreme oversized\n hoodie with back print in navy", category: "Hoodies", image: "HarringtonJacket", gender: "male", description: "Built for life and made to last, this full-zip corduroy jacket is part of our Nike Life collection. The spacious fit gives you plenty of room to layer underneath, while the soft corduroy keeps it casual and timeless.", price: 100.00,status: "newIn"))
 }

@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct Product: Identifiable {
+
+struct Product: Codable, Identifiable {
+    let id: String
     let name: String
     let category: String
     let image: String
@@ -15,14 +17,26 @@ struct Product: Identifiable {
     let description: String?
     let price: Double
     let status: String
-
-    var id: String { name }
 }
+
+struct ProductsResponse: Codable{
+    let products: [Product]
+}
+
+struct ProductResponse: Codable{
+    let product: Product
+}
+
+
+
+
+
 
 let allProducts: [Product] = [
     
 //    hoodies
     Product(
+        id: "preview-1",
         name: "Men's Fleece Pullover Hoodie",
         category: "Hoodies",
         image: "HarringtonJacket",
@@ -33,6 +47,7 @@ let allProducts: [Product] = [
     ),
     
     Product(
+        id: "preview-2",
         name: "Oversized hoodie with large print in brown",
         category: "Hoodies",
         image: "oversized hoodie with large print in brown",
@@ -43,6 +58,7 @@ let allProducts: [Product] = [
     ),
     
     Product(
+        id: "preview-3",
         name: "Fleece Skate Hoodie",
         category: "Hoodies",
         image: "ali-saadat",
@@ -53,6 +69,7 @@ let allProducts: [Product] = [
     ),
     
     Product(
+        id: "preview-4",
         name: "Hollister boxy fit hoodie in black",
         category: "Hoodies",
         image: "Hollister boxy fit hoodie in black",
@@ -63,6 +80,7 @@ let allProducts: [Product] = [
     ),
     
     Product(
+        id: "preview-5",
         name: "Cotton On box fit hoodie in slate",
         category: "Hoodies",
         image: "Cotton On box fit hoodie in slate",
@@ -73,6 +91,7 @@ let allProducts: [Product] = [
     ),
     
     Product(
+        id: "preview-6",
         name: "ASOS DESIGN extreme oversized hoodie with back print in navy",
         category: "Hoodies",
         image: "extreme oversized hoodie with back print in navy",
@@ -84,6 +103,7 @@ let allProducts: [Product] = [
     
 //    shorts
     Product(
+        id: "preview-7",
         name: "Jack & Jones lounge shorts in black",
         category: "Shorts",
         image: "Jack & Jones lounge shorts in black",
@@ -94,6 +114,7 @@ let allProducts: [Product] = [
     ),
     
     Product(
+        id: "preview-8",
         name: "4505 Icon 5 inch quick dry training shorts with zip pockets in caper",
         category: "Shorts",
         image: "5 inch quick dry training shorts with zip pockets in caper",
@@ -105,6 +126,7 @@ let allProducts: [Product] = [
     
 //    accessories
     Product(
+        id: "preview-9",
         name: "Accessories",
         category: "Accessories",
         image: "HarringtonJacket",
@@ -116,6 +138,7 @@ let allProducts: [Product] = [
 
     //    shoes
     Product(
+        id: "preview-10",
         name: "Shoes",
         category: "Shoes",
         image: "HarringtonJacket",
@@ -127,6 +150,7 @@ let allProducts: [Product] = [
     
     //   bags
     Product(
+        id: "preview-1",
         name: "Classic Bags",
         category: "Bag",
         image: "HarringtonJacket",
@@ -136,3 +160,5 @@ let allProducts: [Product] = [
         status: "newIn"
     )
 ]
+
+

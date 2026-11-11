@@ -11,13 +11,15 @@ struct HomeScreen: View {
     
     @State private var searchItems = ""
     @Binding var selectedGender: String
+    
+    @StateObject private var viewModel = ProductViewModel()
 
     private var genderLabel: String {
         selectedGender == "male" ? "Men" : "Women"
     }
 
     private var selectedProducts: [Product] {
-        allProducts.filter { $0.gender == selectedGender }
+        viewModel.products.filter { $0.gender == selectedGender }
     }
     var body: some View {
         VStack(alignment: .leading){
@@ -125,10 +127,10 @@ struct HomeScreen: View {
             
             ScrollView(showsIndicators:false){
                 VStack(alignment: .leading, spacing: 24){
-                    TopSelling(products: allProducts.filter { $0.status == "topSelling" })
+                    TopSelling(products: viewModel.products.filter { $0.status == "topSelling" })
                         
                     
-                    NewInView(products: allProducts.filter { $0.status == "newIn" })
+                    NewInView(products: viewModel.products.filter { $0.status == "newIn" })
                 }
             }
         }
@@ -137,6 +139,9 @@ struct HomeScreen: View {
         .padding(.horizontal, 24)
         .frame(maxHeight: .infinity)
         .background(.midnightViolet900)
+        .task {
+            await viewModel.fetchAllProduct()
+        }
     }
 }
 

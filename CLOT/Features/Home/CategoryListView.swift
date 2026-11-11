@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CategoryListView: View {
     @Binding var selectedGender: String
+    @StateObject private var viewModel = ProductViewModel()
     
     var body: some View {
         VStack(alignment: .leading){
@@ -21,7 +22,7 @@ struct CategoryListView: View {
                     ForEach(categories){
                         category in
                         NavigationLink{
-                            ProductListView(products: allProducts.filter {
+                            ProductListView(products: viewModel.products.filter {
                                 $0.gender == selectedGender && $0.category == category.name
                             }
                             )
@@ -47,6 +48,9 @@ struct CategoryListView: View {
         }
         .padding(.horizontal, 24)
         .background(.midnightViolet900)
+        .task {
+            await viewModel.fetchAllProduct()
+        }
     }
 }
 
