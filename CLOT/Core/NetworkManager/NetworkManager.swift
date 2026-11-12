@@ -31,7 +31,7 @@ final class NetworkManager {
             body: user
         )
     }
-
+    
     func savePreferences(
         shoppingFor: String,
         ageRange: String,
@@ -62,7 +62,7 @@ final class NetworkManager {
         request.httpMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         if let token {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
@@ -95,6 +95,8 @@ final class NetworkManager {
         }
     }
     
+    
+    //    product
     func get<Response: Decodable>(
         path: String
     ) async throws -> Response{
@@ -131,6 +133,32 @@ final class NetworkManager {
             throw APError.unableToComplete
         }
     }
+    
+    //    cart
+    func addToCart(
+        product: Product,
+        size: String,
+        color: String,
+        quantity: Int,
+        token: String
+    )async throws-> CartModel{
+        try await request(
+            path: "/carts",
+            method: "POST",
+            body: AddToCartRequest(
+                productID: product.id,
+                name: product.name,
+                image: product.image,
+                price: product.price,
+                size: size,
+                color: color,
+                category: product.category,
+                quantity: quantity
+                
+            ),
+            token: token
+        )
+    }
 }
 
 private struct LoginRequest: Encodable {
@@ -141,7 +169,7 @@ private struct LoginRequest: Encodable {
 private struct UserPreferencesRequest: Encodable {
     let shoppingFor: String
     let ageRange: String
-
+    
     enum CodingKeys: String, CodingKey {
         case shoppingFor = "shopping_for"
         case ageRange = "age_range"
@@ -153,7 +181,7 @@ struct UserPreferencesResponse: Decodable {
     let userId: String
     let shoppingFor: String
     let ageRange: String
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
@@ -174,6 +202,6 @@ struct UserResponse: Codable {
     let email: String
 }
 
-    struct ServerErrorResponse: Decodable {
+struct ServerErrorResponse: Decodable {
     let message: String
 }

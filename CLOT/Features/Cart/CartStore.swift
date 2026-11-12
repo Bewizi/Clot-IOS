@@ -8,12 +8,55 @@ struct CartItem: Identifiable {
     let color: String
     var quantity: Int
 }
-
+@MainActor
 final class CartStore: ObservableObject {
     @Published private(set) var items: [CartItem] = []
+    @Published var isAddingToCart = false
+    @Published var errorMessage: String?
+    
     var subtotal: Double { items.reduce(0) { $0 + $1.product.price * Double($1.quantity) } }
+    
+    func add(
+        product: Product,
+        size: String,
+        color: String,
+        quantity: Int
+    )async {
+        guard let token = UserDefaults.standard.string(forKey: "authToken")
+                else{
+            errorMessage = "You must be logged in"
+            return
+        }
+        
+        isAddingToCart = true
+        errorMessage = nil
+        
+        defer{
+            isAddingToCart = false
+        }
+        
+        do {
+            let savedCart = try await NetworkManager.shared.addToCart(
+                product: product,
+                size: size,
+                color: color,
+                quantity: quantity,
+                token: token
+            )
+            
+            
+            addLocally(
+                product: product,
+                size: size,
+                color: color,
+                quantity: quantity
+            )
+        }catch{
+            errorMessage = error.localizedDescription
+        }
+    }
 
-    func add(product: Product, size: String, color: String, quantity: Int) {
+  private  func addLocally(product: Product, size: String, color: String, quantity: Int) {
         if let index = items.firstIndex(where: { $0.product.name == product.name && $0.size == size && $0.color == color }) {
             items[index].quantity += quantity
         } else { items.append(CartItem(product: product, size: size, color: color, quantity: quantity)) }

@@ -195,7 +195,9 @@ struct ProductDetails: View {
         .padding(.horizontal, 24)
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Button {
-                cart.add(product: product, size: size, color: colorName, quantity: quantity)
+                Task{
+                   await cart.add(product: product, size: size, color: colorName, quantity: quantity)
+                }
             } label: {
                 HStack {
                     AppText(
@@ -221,6 +223,7 @@ struct ProductDetails: View {
                 .background(.mediumSlateBlue300)
                 .clipShape(Capsule())
             }
+            .disabled(cart.isAddingToCart)
             .padding(.horizontal, 24)
             .padding(.top, 12)
         }
